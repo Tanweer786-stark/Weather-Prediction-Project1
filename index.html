@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deep Weather Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <!-- LEFT: big current -->
+      <div class="main-card">
+        <div class="search">
+          <input id="locationInput" placeholder="Search location (e.g. London, New York, Paris)" />
+          <button id="searchBtn">Search</button>
+        </div>
+
+        <div class="location-row">
+          <div class="label">Location</div>
+          <div id="locName">—</div>
+          <div style="margin-left:auto; color:var(--muted)" id="lastUpdated"></div>
+        </div>
+
+        <div style="display:flex; gap:18px; align-items:center" class="big-temp">
+          <div>
+            <div class="temp" id="tempC">--°</div>
+            <div style="display:flex; gap:10px; align-items:center" class="small">
+              <div id="condText">—</div>
+              <div style="color:var(--muted)" id="localTime">—</div>
+            </div>
+          </div>
+
+          <div class="condition-icon">
+            <img id="condIcon" src="" alt="condition icon" />
+          </div>
+        </div>
+
+        <div class="summary" id="summaryText">
+          Enter a location and get current weather information with detailed metrics.
+        </div>
+
+        <div class="metrics" style="margin-top:18px">
+          <div class="metric">
+            <div class="title">Feels Like</div>
+            <div class="value" id="feelsLike">--°</div>
+            <div style="font-size:12px; color:var(--muted)">Due to temperature + humidity</div>
+          </div>
+
+          <div class="metric">
+            <div class="title">Visibility</div>
+            <div class="value" id="visibility">-- km</div>
+            <div style="font-size:12px; color:var(--muted)">Also shown in miles</div>
+          </div>
+
+          <div class="metric">
+            <div class="title">Humidity</div>
+            <div class="value" id="humidity">--%</div>
+            <div style="font-size:12px; color:var(--muted)" id="dewPoint">Dew point: --°</div>
+          </div>
+
+          <div class="metric">
+            <div class="title">Precipitation</div>
+            <div class="value" id="precip">-- mm</div>
+            <div style="font-size:12px; color:var(--muted)">Recent precipitation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: details -->
+      <div class="right">
+        <!-- Air Quality -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+            <div style="font-weight:700">Air Quality</div>
+            <div style="color:var(--muted); font-size:13px" id="aqiSource">Current conditions</div>
+          </div>
+          <div id="airQuality">
+            <div style="color:var(--muted)">Air quality data will appear here</div>
+          </div>
+        </div>
+
+        <!-- Weather Details -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+            <div style="font-weight:700">Current Conditions</div>
+            <div style="color:var(--muted); font-size:13px" id="conditionsNote">Live data</div>
+          </div>
+          <div id="currentDetails">
+            <div style="color:var(--muted)">Weather details will appear here</div>
+          </div>
+        </div>
+
+        <!-- analysis row -->
+        <div style="display:flex; gap:12px">
+          <div class="card" style="flex:1">
+            <div style="font-weight:700; margin-bottom:10px">UV Index</div>
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="flex:1">
+                <div class="uvbar" aria-hidden="true">
+                  <div class="uvpos" id="uvpos"></div>
+                </div>
+                <div style="margin-top:8px; font-weight:700" id="uvVal">--</div>
+                <div style="color:var(--muted); font-size:13px" id="uvAdvice">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="width:260px; display:flex; gap:12px; align-items:center; justify-content:space-between">
+            <div style="flex:1">
+              <div style="font-weight:700">Wind</div>
+              <div style="font-size:18px; font-weight:800" id="windSpeed">-- kph</div>
+              <div style="color:var(--muted); margin-top:6px" id="windGust">Gusts: --</div>
+              <div style="color:var(--muted); margin-top:6px" id="windDirText">Dir: --</div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+              <div class="compass" title="Wind direction">
+                <svg class="arrow" viewBox="0 0 24 24" id="windArrow">
+                  <path d="M12 2 L15 12 L12 9 L9 12 Z" fill="#fff" opacity="0.95"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; gap:12px; align-items:center">
+            <div style="font-weight:700">Weather Insights</div>
+            <div style="color:var(--muted)">Current weather analysis</div>
+          </div>
+          <div style="text-align:right; color:var(--muted)">
+            <div id="trendText">—</div>
+            <div style="font-size:12px; margin-top:6px">Data refreshed live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; align-items:center">
+      <div>Built with WeatherAPI • Current Weather • Real-time Data</div>
+      <div><b>Tanweer Iqbal</b></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
