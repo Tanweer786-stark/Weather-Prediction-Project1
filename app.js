@@ -1,5 +1,5 @@
 // ====== CONFIG ======
-const API_KEY = "735b384d7e24488fb6b50538253008"; // Replace with your real WeatherAPI key
+const API_KEY = "eeb9641053f54457a9251821251309"; // Replace with your real WeatherAPI key
 const DEFAULT_LOCATION = "London";
 
 // ====== ELEMENTS ======
@@ -176,3 +176,4 @@ el.locationInput.addEventListener("keydown", (e) => {
   el.locationInput.value = DEFAULT_LOCATION;
   fetchAndRender(DEFAULT_LOCATION);
 })();
+
